@@ -1,0 +1,29 @@
+Exo 1 : 
+Créer un formulaire d'inscription qui permet à l'utilisateur d'enter son :
+- Prénom
+- Nom
+Le prénom et le nom ne doivent pas êtres vides.
+
+Exo 2 :
+Ajouter au formulaire un champ date de naissance. Composé de 3 listes. 
+Une liste pour 31 jours
+Une liste pour 12 mois
+Une liste d'années, allant de 1916 à 2016.
+Le premier élément de chaque liste doit être une phrase, respectivement jour / mois / année. La valeur de cette option doit être 0. 
+Assurez-vous que l'utilisateur choisisse bien un jour, un mois et une année. 
+
+Exo 3 :
+Ajouter au formulaire un champ sexe de type radio. Les champs doivent être :
+Homme, femme ou sans réponse. 
+Assurez-vous que l'utilisateur a bien choisi une de ces options. 
+
+Exo 4 : 
+Ajouter au formulaire un checkbox, pour savoir si l'utilisteur souhaite s'abonner à une infolettre. 
+
+Exo 5 :
+Ajouter une équation mathématique à laquelle l'utilisateur doit réondre dans un input type text. Vérifiez que la réponse 
+est bien un nombre et correspond au bon résultat. 
+
+Exo 6 : * Niveau ninja
+Une fois que les entrées sont valides, affichez dans une div, à l'aide de jQuery, toutes les informatiosn entrées 
+par l'utilisateur. 

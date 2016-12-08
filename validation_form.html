@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html>
+  	<head>
+    	<meta charset="UTF-8">
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+	</head>
+	<style type="text/css">
+		[id^=input_] span {
+			display: none;
+			color: red;
+			font-weight: bold;
+		}
+		.error span {
+			display: block;
+		}
+		.error input, .error select {
+			border: 1px solid red;
+		}
+		#date_naissance [id^=input_] {
+			float: left;
+			padding: 0 10px 0 0;
+		}
+		#date_naissance {
+			margin: 10px 0;
+		}
+		#date_naissance:after {
+			display: block;
+			content: ' ';
+			clear: both;
+		}
+	</style>
+	<body>
+
+		<form action=""
+      onsubmit="return valider(this)"
+		  method="get" name="formSaisie">
+		  	<div id="input_nom">
+			    <label for="nom">Saisissez votre nom :</label>
+			    <input type="text" name="nom" id="nom" />
+			    <span>Ce champ est obligatoire! </span>
+		    </div>
+
+
+		    <div id="input_prenom">
+			    <label for="prenom">Saisissez votre prenom :</label>
+			    <input type="text" name="prenom" id="prenom" />
+			    <span>Ce champ est obligatoire! </span>
+		    </div>
+
+
+		    <div id="date_naissance">
+		    	<div id="input_jour">
+		    	</div>
+		    	<div id="input_mois">
+		    	</div>
+		    	<div id="input_annee">
+		    	</div>
+		    </div>
+			</br>
+
+			<div id="input_sex">
+			    <label for="sex">Saisissez votre sex :</label>
+				<INPUT type="radio" name="sex" value="Male"/> Homme
+        		<INPUT type="radio" name="sex" value="Female"/> Femme
+       			<INPUT type="radio" name="sex" value="Sans"/> Sans Réponse
+			    <span>Ce champ est obligatoire! </span>
+		    </div>
+			</br>
+
+
+			<div id="input_checkbox">
+			    <label for="box">S'abonner à une infolettre:</label>
+				<INPUT type="checkbox" id="check1" name="interests" value="checked"/> Oui
+			    <span>Ce champ est obligatoire! </span>
+		    </div>
+
+
+			 <div id="input_number">
+			    <label for="number">S'il vous plaît répondre: 1+6=</label>
+			    <input type="text" name="number" id="number" />
+			    <span>Ce champ est obligatoire! </span>
+		    </div>
+
+
+		    <input type="submit" value="Ok" />
+		</form>
+
+<div id="rez"></div>
+		<script type="text/javascript">
+
+			var inputArray = [["text", "nom"], ["text", "prenom"], ["select", "jour"], ["select", "mois"], ["select", "annee"], ["radio", "sex"], ["checkbox", "interests"], ["text", "number"], ];
+
+
+
+
+
+
+			// Ajouter les listes au formulaire
+			var liste_jour = "<select name='jour'><option value='0'>Jour</option>";
+			for (var i = 1; i <= 31; i++) {
+				liste_jour += "<option value='"+ i +"'>"+ i +"</option>";
+			};
+			liste_jour += "</select>";
+
+			var liste_mois = "<select name='mois'><option value='0'>Mois</option>";
+			for (var i = 1; i <= 12; i++) {
+				liste_mois += "<option value='"+ i +"'>"+ i +"</option>";
+			};
+			liste_mois += "</select>";
+
+			var liste_annee = "<select name='annee'><option value='0'>Année</option>";
+			for (var i = 1916; i <= 2016; i++) {
+				liste_annee += "<option value='"+ i +"'>"+ i +"</option>";
+			};
+			liste_annee += "</select>";
+
+			document.getElementById("input_jour").innerHTML = liste_jour;
+			document.getElementById("input_mois").innerHTML = liste_mois;
+			document.getElementById("input_annee").innerHTML = liste_annee;
+
+
+
+
+
+
+
+
+			// valider le formulaire
+			function validerText(form, inputName){
+				var reponseText = true;
+				var inputElem = form.elements[inputName];
+				var errorDivElem = document.getElementById("input_" + inputName);
+				var inputNumber = form.number;
+
+				if(inputElem.value != "" && inputNumber.value =="7" ) {
+					errorDivElem.className = "";
+				} else {
+					errorDivElem.className = "error";
+					reponseText = false;
+				}
+
+				return reponseText;
+			}
+
+			function validerOption(form, selectName){
+				var reponseOption = true;
+				var selectElem = form.elements[selectName];
+				var errorDivElem = document.getElementById("input_" + selectName);
+				if(selectElem.value != 0){
+					selectElem.className = "";
+				} else {
+					errorDivElem.className = "error";
+					reponseOption = false;
+				}
+				return reponseOption;
+			}
+
+
+
+			function validerSex(form, radio){
+				var reponseOption = true;
+				var selectElem = form.elements[radio];
+				var errorDivElem = document.getElementById("input_" + radio);
+				if(selectElem.value != 0){
+					selectElem.className = "";
+				} else {
+					errorDivElem.className = "error";
+					reponseOption = false;
+				}
+				return reponseOption;
+			}
+
+
+			function validerBox(form, checkbox){
+				var reponseOption = true;
+				var selectElem = form.elements[checkbox];
+
+				var errorDivElem = document.getElementById("input_" + checkbox);
+				if(/*selectElem.checked*/ selectElem.value != 0){
+					selectElem.className = "";
+				} else {
+					errorDivElem.className = "error";
+					reponseOption = false;
+				}
+				return reponseOption;
+			}
+
+
+
+
+			function valider(formulaire) {
+				var reponse = true;
+				for (var i = 0; i < inputArray.length; i++) {
+					var leType = inputArray[i][0];
+					var leNom = inputArray[i][1];
+
+					switch(leType) {
+					    case "text":
+					        reponse = validerText(formulaire, leNom) && reponse;
+					        break;
+					    case "select":
+					        reponse = validerOption(formulaire, leNom) && reponse;
+					        break;
+
+					    case "radio":
+					        reponse = validerSex(formulaire, leNom) && reponse;
+					        break;
+
+					    case "checkbox":
+					        reponse = validerBox(formulaire, leNom) && reponse;
+					        break;
+					    default:
+					        reponse = false;
+					}
+
+				};
+
+				return reponse;
+			}
+
+
+
+
+$(document).ready(function(){
+
+			 $("input[type='submit']").click(function(e){
+            e.preventDefault();
+			       var userData = [];
+             var html = '';
+
+             $('form [type=text], [type=checkbox], [type=radio], select').each(function() {
+               var $input = $(this);
+               var value = $input.val();
+               if (value) {
+                 userData.push([$input.attr('name'), value]);
+               }
+             });
+
+             userData.forEach(function(value) {
+
+               html += '<strong>' + value[0] + ':' + '</strong>';
+               html += ' ' + value[1];
+               html += '<br />';
+             });
+
+             $('#rez').empty();
+
+            $('#rez').html(html);
+
+			 });
+
+
+});
+
+		</script>
+	</body>
+</html>
