@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html>
+  	<head>
+    	<meta charset="UTF-8">
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+	</head>
+	<style type="text/css">
+		.gallerie {
+			width: 500px;
+			margin: 25px auto 0 auto;
+      position: relative;
+		}
+		.gallerie .carrousel {
+			width: 100%;
+		}
+		.gallerie .carrousel .miniature {
+			width: 50px;
+			height: 50px;
+			padding: 10px 25px;
+			float: left;
+		}
+		.gallerie .miniature img {
+			cursor: pointer;
+		}
+		.gallerie img {
+			width: 100%;
+			height: 100%;
+		}
+		.gallerie .image {
+			width: 100%;
+			height: auto;
+		}
+		.active {
+			border-bottom: 5px solid red;
+		}
+    .controls {
+      position: absolute;
+      top: 50%;
+      margin-top: -20px;
+      width: 100%;
+    }
+    .controls > button {
+      width: 40px;
+      height: 40px;
+      background: none;
+      color: #000;
+      font-size: 30px;
+      border: none;
+      line-height: 30px;
+    }
+    .controls .prev {
+      position: absolute;
+      left: -40px;
+    }
+    .controls .next {
+      position: absolute;
+      right: -40px;
+    }
+	</style>
+	<body>
+		<div class="gallerie">
+			<div class="carrousel">
+				<div class="miniature"><img src="images/1.jpg" data="images/1.jpg"></div>
+				<div class="miniature"><img src="images/2.jpg" data="images/2.jpg"></div>
+				<div class="miniature"><img src="images/3.jpg" data="images/3.jpg"></div>
+				<div class="miniature"><img src="images/4.jpg" data="images/4.jpg"></div>
+				<div class="miniature"><img src="images/5.jpg" data="images/5.jpg"></div>
+			</div>
+			<div class="image">
+				<img src="images/1.jpg">
+			</div>
+		</div>
+
+		<script type="text/javascript">
+			$(document).ready(function(){
+        // current slide
+        var current = 0;
+        // thumbnails
+        var $slides = $('.carrousel > .miniature');
+
+        // go to a slide
+        function goToSlide(index) {
+          // get a thumbnail by index
+          var $slide = $($slides[index]);
+					var srcOrigin = $slide.find('img').attr("data");
+					$(".gallerie .image").html("<img src='"+srcOrigin+"'>");
+					$(".miniature img").removeClass("active");
+					$slide.find('img').addClass("active");
+        }
+
+        // function creates navigation elements
+        function createButtons() {
+          // create container element
+          var $controls = $(document.createElement('div')).addClass('controls');
+          // create previous button
+          var $prev = $(document.createElement('button')).addClass('control-btn prev').html('<');
+          // create next button
+          var $next = $(document.createElement('button')).addClass('control-btn next').html('>');
+          // append buttons to the container
+          $controls.append($prev).append($next);
+          // append container to the gallery
+          $('.gallerie').append($controls);
+
+          // bind click to prev button
+          $prev.on('click', function(e) {
+            if (current != 0) {
+              current = current - 1;
+              goToSlide(current)
+            }
+          });
+          // bind click to next button
+          $next.on('click', function(e) {
+            if (current < $slides.length - 1) {
+              current = current + 1;
+              goToSlide(current);
+            }
+          });
+        }
+
+        // create navigation arrows
+        createButtons();
+
+        // load the first slide
+        goToSlide(0);
+
+        // bind click event to thumbnails
+				$(".miniature img").on("click", function(e) {
+          // get target index
+          current = $(this).closest('.miniature').index();
+          goToSlide(current);
+        });
+
+			});
+		</script>
+	</body>
+</html>

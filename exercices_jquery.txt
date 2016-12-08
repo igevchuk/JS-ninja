@@ -1,0 +1,16 @@
+Exo 1 :
+Créer deux boutons, et une div qui mesure 10% de with du browser. Un height de 40px. 
+Un boutton aura sera appelé avancer, l'autre reculer.
+Lorsque l'utilisateur clique sur suivant, la div avance de 10%, lorsque l'utilisateur clique sur prcédent, la div recule de 10%.
+
+Exo 2 : 
+Créer une liste horizontale avec 5 images. chacune doit être de taille 50px x 50px.
+Chaque image aura comme atribue data, une url vers une version large de la même image. 
+- En dessous de la liste des images, créez une div de taille 500px x 500px. 
+- À chaque fois qu'un utilisateur va cliquer sur une des images de la liste, la grande version de l'image doit apparaitre dans la div en dessous. 
+- Ajouter un style à l'image miniature, qui démontre qu'elle est bien celle qui est affichée. 
+
+Exo 3 :* Niveau ninja 
+Ajouter deux bouttons, un suivant et un précédent. Lorsque vous cliquez sur le suivant, l'image suivante sera afficher, 
+et lorsque vous cliquez sur la précédente, c'est la précédente qui l'est. 
+
